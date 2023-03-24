@@ -7,6 +7,10 @@ import org.springframework.boot.runApplication
 class Application
 fun main(args: Array<String>) {
     runApplication<Application>(*args)
-    println("Application started")
+    println("Application started...")
 
+    val calculator = CurrentTimeCalculator()
+    var greeting = calculator.calculateTime()
+
+    println(greeting)
 }
