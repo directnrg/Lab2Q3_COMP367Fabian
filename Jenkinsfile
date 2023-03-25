@@ -13,13 +13,36 @@ pipeline {
         }
         stage("Build maven project") {
             steps {
-                sh 'mvn clean install'
+                bat 'mvn clean install'
             }
         }
         
         stage("Unit test") {
             steps {
-                sh "mvn test"
+                bat "mvn test"
+            }
+        }
+        stage('Create Docker image') {
+            steps {
+                script {
+                    bat 'docker build -t directnrg/lab3q1-image:%env:BUILD_ID% .'
+                }
+            }
+        }
+        stage('Login to Docker') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'd7bd5eda-0996-4863-b410-99f036fc2b32',
+                        passwordVariable: 'dockerhub-pwd', usernameVariable: 'dockerhub-username')])
+                
+                bat 'docker login -u %dockerhub_username% -p %dockerhub_pwd%'
+            }
+        }
+        
+        stage('Push Docker image') {
+            steps {
+                script {
+                    bat 'docker push directnrg/lab3q1-image:%BUILD_ID%'
+                }
             }
         }
     }
