@@ -25,7 +25,7 @@ pipeline {
         stage('Create Docker image') {
             steps {
                 script {
-                    bat 'docker build -t directnrg/lab3q1-image:%env:BUILD_ID% .'
+                    bat 'docker build -t directnrg/lab3q1-image:%BUILD_ID% .'
                 }
             }
         }
