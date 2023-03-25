@@ -25,7 +25,7 @@ pipeline {
         stage('Create Docker image') {
             steps {
                 script {
-                    bat 'docker build -t directnrg/lab3q1-image:%BUILD_ID% .'
+                    bat "docker build -t directnrg/lab3q1-image:${env.BUILD_ID} ."
                 }
             }
         }
@@ -34,7 +34,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'd7bd5eda-0996-4863-b410-99f036fc2b32',
                         passwordVariable: 'dockerhub-pwd', usernameVariable: 'dockerhub-username')]) {
                     
-                    bat 'docker login -u %dockerhub_username% -p %dockerhub_pwd%'
+                    bat "docker login -u ${dockerhub_username} -p ${dockerhub_pwd}"
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline {
         stage('Push Docker image') {
             steps {
                 script {
-                    bat 'docker push directnrg/lab3q1-image:%BUILD_ID%'
+                    bat "docker push directnrg/lab3q1-image:${env.BUILD_ID}"
                 }
             }
         }
