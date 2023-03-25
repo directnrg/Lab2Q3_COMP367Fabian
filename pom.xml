@@ -110,6 +110,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>Lab3Q1-devops</finalName>
     </build>
 
     <dependencies>
