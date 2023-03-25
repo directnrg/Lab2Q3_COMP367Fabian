@@ -32,9 +32,9 @@ pipeline {
         stage('Login to Docker') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'd7bd5eda-0996-4863-b410-99f036fc2b32',
-                        passwordVariable: 'dockerhub-pwd', usernameVariable: 'dockerhub-username')]) {
-                    
+                        passwordVariable: 'dockerhub_pwd', usernameVariable: 'dockerhub_username')]) {
                     bat "docker login -u ${dockerhub_username} -p ${dockerhub_pwd}"
+                    
                 }
             }
         }
