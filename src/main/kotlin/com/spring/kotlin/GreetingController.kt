@@ -15,10 +15,7 @@ class GreetingController {
     fun greetingG(model: Model): String {
         val calculator = CurrentTimeCalculator()
         var greeting = calculator.calculateTime()
-        val test = "test"
         model.addAttribute("greeting", greeting)
-        model.addAttribute("test", test)
-        println(greeting)
         return "index"
 
     }
